@@ -44,3 +44,7 @@ app.get('/favorites', getShops);
 app.get('/about', aboutMe);
 
 //Shop Constructor
+function BikeShop(data){
+  this.name = data.summary;
+  this.
+}
