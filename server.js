@@ -36,7 +36,7 @@ app.set('view engine', 'ejs');
 
 //API routes
 app.get('/' , homePage);
-// app.get('location', getlocation);
+app.get('/search', getLocation);
 // app.post('/shops', saveShop);
 // app.get('/shops/:id', getOneShop);
 // app.put('/shops/:id', updateShop);
@@ -45,10 +45,22 @@ app.get('/' , homePage);
 // app.get('/about', aboutMe);
 
 //Shop Constructor
-function BikeShop(data){
-  this.name = data.summary;
+// function BikeShop(data){
+//   this.name = data.summary;
 
+// }
+
+function getLocation(request, response){
+  const embeddedMap = `https://www.google.com/maps/embed/v1/search?key=${process.env.GEOCODE_API_CODE}&q=bicycle+stores+in+${request.query.data}`;
+  // const embeddedData = {};
+  // https://visionmedia.github.io/superagent/
+  return superagent.get(embeddedMap) //CORS is required with superagent to use URLs.
+    .then(result => {
+      console.log('this is the result body' + result.body);
+    })
+    .catch(err => console.log(err,response));
 }
+
 
 
 
