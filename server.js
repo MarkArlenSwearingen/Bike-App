@@ -8,6 +8,7 @@ const cors = require('cors');
 const superagent = require('superagent');
 const pg = require('pg');
 const methodOverride = require('method-override');
+const ejs = require('ejs');
 const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({extended: true}));
@@ -16,7 +17,7 @@ app.use(cors());
 //Database Connection
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
-client.on('err', err +> console.error(err));
+client.on('err', err => console.error(err));
 
 //Middleware between client and server
 app.use(methodOverride((request, response) => {
@@ -34,17 +35,27 @@ app.use('public', express.static('public'));
 app.set('view engine', 'ejs');
 
 //API routes
-app.get('/' homePage);
-app.get('location', getlocation);
-app.post('/shops', saveShop);
-app.get('/shops/:id', getOneShop);
-app.put('/shops/:id', updateShop);
-app.delete('/ships/:id', deleteShop):
-app.get('/favorites', getShops);
-app.get('/about', aboutMe);
+app.get('/' , homePage);
+// app.get('location', getlocation);
+// app.post('/shops', saveShop);
+// app.get('/shops/:id', getOneShop);
+// app.put('/shops/:id', updateShop);
+// app.delete('/ships/:id', deleteShop)
+// app.get('/favorites', getShops);
+// app.get('/about', aboutMe);
 
 //Shop Constructor
 function BikeShop(data){
   this.name = data.summary;
-  this.
+
 }
+
+
+
+//Home Page
+function homePage(request,response){
+  response.render('index');
+}
+
+//Application Listener
+app.listen(PORT, console.log(`Listening on PORT: ${PORT}`))
